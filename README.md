@@ -1,2 +1,4 @@
 # Cybersecurity
 Cybersecurity Projects
+
+Strengths
