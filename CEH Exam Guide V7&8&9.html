@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CEHv13 Practical Exam Reference: Modules 07-09</title>
+    <style>
+        :root {
+            --bg-color: #0d0d0d;
+            --terminal-green: #00ff41;
+            --dim-green: #008F11;
+            --alert-color: #ff3333;
+            --panel-bg: #111;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Courier New', Courier, monospace;
+            line-height: 1.6;
+            color: #ccc;
+            background-color: var(--bg-color);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- Sticky Navigation --- */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            border-bottom: 2px solid var(--terminal-green);
+            z-index: 1000;
+            display: flex;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+        }
+
+        .top-nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .top-nav li { margin: 0; }
+
+        .top-nav a {
+            color: var(--dim-green);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            padding: 15px 10px;
+            display: block;
+            transition: all 0.3s ease;
+            border-right: 1px solid #222;
+        }
+
+        .top-nav a:hover {
+            color: #000;
+            background-color: var(--terminal-green);
+        }
+
+        /* --- Main Layout --- */
+        .container {
+            max-width: 950px;
+            margin: 0 auto;
+        }
+
+        /* SECTION STYLING */
+        section {
+            min-height: 100vh;
+            padding-top: 100px;
+            padding-bottom: 50px;
+            border-bottom: 1px dashed var(--dim-green);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            position: relative;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        h1 {
+            color: var(--terminal-green);
+            text-align: center;
+            border-bottom: 2px dashed var(--dim-green);
+            padding-bottom: 20px;
+            margin-bottom: 40px;
+            text-transform: uppercase;
+            text-shadow: 0 0 5px var(--dim-green);
+        }
+
+        h2 {
+            color: #000;
+            background-color: var(--terminal-green);
+            padding: 10px 15px;
+            display: inline-block;
+            box-shadow: 4px 4px 0px var(--dim-green);
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            font-weight: bold;
+        }
+
+        h3 {
+            color: var(--terminal-green);
+            margin-top: 40px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+        }
+
+        h3::before {
+            content: "> ";
+            color: var(--dim-green);
+        }
+
+        p, li {
+            margin-bottom: 10px;
+        }
+
+        code {
+            font-family: 'Consolas', 'Monaco', monospace;
+            background-color: #1a1a1a;
+            color: #fff;
+            padding: 2px 6px;
+            border: 1px solid #333;
+            border-radius: 2px;
+        }
+
+        /* Preformatted blocks for prompts/long commands */
+        pre {
+            background-color: #1a1a1a;
+            border: 1px solid #333;
+            padding: 10px;
+            overflow-x: auto;
+            white-space: pre-wrap;
+            color: #fff;
+        }
+
+        .checklist {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .checklist li::before {
+            content: "[x] ";
+            color: var(--terminal-green);
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .note {
+            background-color: rgba(255, 51, 51, 0.1);
+            border-left: 4px solid var(--alert-color);
+            color: #ff9999;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        
+        .nav-buttons {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+        }
+
+        .btn {
+            color: var(--bg-color);
+            background-color: var(--dim-green);
+            text-decoration: none;
+            padding: 10px 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        .btn:hover { background-color: var(--terminal-green); }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            color: var(--dim-green);
+            font-size: 0.8em;
+            text-transform: uppercase;
+        }
+
+        @media print {
+            .top-nav, .nav-buttons { display: none; }
+            body { color: black; background: white; }
+            section { 
+                page-break-before: always; 
+                min-height: auto;
+                border: none;
+                padding-top: 0;
+            }
+            h2 { border: 1px solid black; background: none; color: black; box-shadow: none; }
+            code, pre { border: none; color: black; background: #eee; }
+            section:first-of-type { page-break-before: auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="top-nav">
+        <ul>
+            <li><a href="#intro">Home</a></li>
+            <li><a href="#sec1">1. Trojan/RAT</a></li>
+            <li><a href="#sec2">2. Virus Creation</a></li>
+            <li><a href="#sec3">3. Static Analysis</a></li>
+            <li><a href="#sec4">4. Dynamic Analysis</a></li>
+            <li><a href="#sec5">5. Sniffing</a></li>
+            <li><a href="#sec6">6. Social Eng</a></li>
+        </ul>
+    </nav>
+
+    <div class="container">
+
+        <section id="intro" style="justify-content: center; align-items: center; text-align: center;">
+            <div style="border: 2px solid var(--terminal-green); padding: 40px; box-shadow: 0 0 20px var(--dim-green);">
+                <h1 style="border:none; margin:0;">CEHv13 Practical<br>Exam Reference Guide</h1>
+                <p style="margin-top:20px; color: var(--terminal-green);">Modules 07, 08 & 09 Included</p>
+                <p>Scroll down or use the menu to navigate.</p>
+            </div>
+        </section>
+
+        <section id="sec1">
+            <h2>Section 1: Trojan Exploitation (njRAT)</h2>
+            <p><strong>Goal:</strong> Configure a RAT client, infect a target, and execute post-exploitation commands.</p>
+
+            <h3>1. Configure the Payload (Attacker Machine)</h3>
+            <ol>
+                <li><strong>Launch Tool:</strong> Open <code>njRAT v0.8d.exe</code> on Windows 11.</li>
+                <li><strong>Port Setup:</strong> Keep default port <code>5553</code> and click <strong>Start</strong> (or OK).</li>
+                <li><strong>Build Payload:</strong> Click the <strong>Builder</strong> button (bottom left).</li>
+                <li><strong>Builder Settings:</strong>
+                    <ul>
+                        <li><strong>Host:</strong> Enter attacker IP (e.g., <code>10.10.1.11</code>).</li>
+                        <li><strong>Port:</strong> <code>5553</code>.</li>
+                        <li><strong>Victim Name:</strong> (Optional) e.g., <code>Hacked</code>.</li>
+                        <li><strong>ExeName:</strong> <code>Explorer.exe</code> (or <code>Trojan.exe</code> for Lab 4).</li>
+                        <li><strong>Directory:</strong> <code>%TEMP%</code>.</li>
+                        <li><strong>Checkboxes:</strong> Enable <strong>Randomize Stub</strong> and <strong>Protect Process [BSOD]</strong>.</li>
+                    </ul>
+                </li>
+                <li><strong>Save:</strong> Click <strong>Build</strong> and save as <code>Test.exe</code>.</li>
+            </ol>
+
+            <h3>2. Establish Connection (Victim Machine)</h3>
+            <ol>
+                <li><strong>Transfer:</strong> Move <code>Test.exe</code> to the victim machine (Windows Server 2022).</li>
+                <li><strong>Execute:</strong> Run <code>Test.exe</code> on the victim machine.</li>
+                <li><strong>Verify:</strong> On the attacker machine, confirm the new connection appears in the njRAT GUI.</li>
+            </ol>
+
+            <h3>3. Post-Exploitation Actions</h3>
+            <ul>
+                <li><strong>File Access:</strong> Right-click Victim &rarr; Manager &rarr; <strong>File Manager</strong>.</li>
+                <li><strong>Command Shell:</strong> Right-click Victim &rarr; Manager &rarr; <strong>Remote Shell</strong>. Run <code>ipconfig/all</code>.</li>
+                <li><strong>Spying:</strong> Right-click Victim &rarr; <strong>Remote Desktop</strong> or <strong>Remote Cam</strong>.</li>
+                <li><strong>Keylogging:</strong> Right-click Victim &rarr; <strong>Keylogger</strong>.</li>
+            </ul>
+
+            <div class="nav-buttons">
+                <a href="#intro" class="btn">&lt; HOME</a>
+                <a href="#sec2" class="btn">NEXT: VIRUSES &gt;</a>
+            </div>
+        </section>
+
+        <section id="sec2">
+            <h2>Section 2: Virus Creation (JPS Virus Maker)</h2>
+            <p><strong>Goal:</strong> Create a destructive virus to disable system defenses on a target.</p>
+
+            <h3>1. Configure Virus Options (Attacker Machine)</h3>
+            <ol>
+                <li><strong>Launch Tool:</strong> Open <code>JPS.exe</code>.</li>
+                <li><strong>Select Destructive Actions:</strong> Check the following boxes:
+                    <ul class="checklist">
+                        <li>Disable Task Manager</li>
+                        <li>Disable Windows Update</li>
+                        <li>Disable Control Panel</li>
+                        <li>Disable Drives</li>
+                        <li>Hide Desktop Icons</li>
+                        <li>Turn Off Windows Firewall & Defender</li>
+                        <li>Auto Startup</li>
+                    </ul>
+                </li>
+                <li><strong>Set Trigger:</strong> Select the <strong>None</strong> radio button.</li>
+            </ol>
+
+            <h3>2. Advanced Configuration</h3>
+            <ol>
+                <li><strong>Access Next Page:</strong> Click the <strong>Right Arrow</strong> icon on the tool interface.</li>
+                <li><strong>System Lockout:</strong>
+                    <ul>
+                        <li><strong>Change Windows Password:</strong> <code>qwerty</code>.</li>
+                        <li><strong>Change Computer Name:</strong> <code>Test</code>.</li>
+                    </ul>
+                </li>
+                <li><strong>Worm Mode:</strong> Check <strong>Enable Convert to Worm</strong>.
+                    <ul>
+                        <li>Name: <code>fedevi</code>.</li>
+                        <li>Timer: <code>1</code> sec.</li>
+                    </ul>
+                </li>
+                <li><strong>Build:</strong> Select Architecture <code>x86(64Bit)</code> and click <strong>Create Virus!</strong>.</li>
+            </ol>
+
+            <h3>3. Verify Infection (Victim Machine)</h3>
+            <ol>
+                <li><strong>Execute:</strong> Run the created <code>Server.exe</code> on Windows Server 2019.</li>
+                <li><strong>Verify Symptoms:</strong>
+                    <ul>
+                        <li>Desktop goes blank.</li>
+                        <li>Task Manager access is denied.</li>
+                        <li>Restart required; login fails with the old password (must use <code>qwerty</code>).</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <div class="nav-buttons">
+                <a href="#sec1" class="btn">&lt; PREV</a>
+                <a href="#sec3" class="btn">NEXT: STATIC ANALYSIS &gt;</a>
+            </div>
+        </section>
+
+        <section id="sec3">
+            <h2>Section 3: Static Analysis</h2>
+            <p><strong>Goal:</strong> Analyze malware file properties without executing it.</p>
+
+            <h3>1. Online Hybrid Analysis</h3>
+            <ol>
+                <li><strong>Upload:</strong> Submit <code>tini.exe</code> to <code>hybrid-analysis.com</code>.</li>
+                <li><strong>Environment:</strong> Select <strong>Windows 11 64 bit</strong>.</li>
+                <li><strong>Analyze Report:</strong>
+                    <ul>
+                        <li>Check <strong>Threat Score</strong> (e.g., 100/100).</li>
+                        <li>Identify classification (e.g., <strong>Trojan Tiny</strong>).</li>
+                        <li>Review <strong>AV Results</strong> (e.g., CrowdStrike, MetaDefender).</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3>2. ELF Analysis (Detect It Easy)</h3>
+            <ol>
+                <li><strong>Load File:</strong> Open <code>ELF Test File</code> in <strong>Detect It Easy (DIE)</strong>.</li>
+                <li><strong>Identify Metadata:</strong>
+                    <ul>
+                        <li><strong>File Type:</strong> <code>ELF64</code>.</li>
+                        <li><strong>Compiler:</strong> <code>GCC</code>.</li>
+                        <li><strong>Architecture:</strong> <code>AMD64</code>.</li>
+                    </ul>
+                </li>
+                <li><strong>Deep Inspection:</strong> Click the <strong>Entropy</strong> button to check packing status.</li>
+            </ol>
+
+            <h3>3. Disassembly (IDA Pro)</h3>
+            <ol>
+                <li><strong>Load File:</strong> Open <code>face.exe</code> in <strong>IDA Pro</strong>.</li>
+                <li><strong>View Assembly:</strong> Right-click in the <strong>IDA View-A</strong> window &rarr; select <strong>Text view</strong>.</li>
+                <li><strong>Trace Flow:</strong> Go to <strong>View</strong> &rarr; <strong>Graphs</strong> &rarr; <strong>Flow chart</strong>.</li>
+                <li><strong>Check Imports:</strong> Click the <strong>Imports</strong> tab to see API calls (e.g., <code>Kernel32</code>).</li>
+            </ol>
+
+            <h3>4. Code Analysis (OllyDbg)</h3>
+            <ol>
+                <li><strong>Load File:</strong> Open <code>tini.exe</code> in <strong>OllyDbg</strong>.</li>
+                <li><strong>Examine Activity:</strong>
+                    <ul>
+                        <li><strong>View</strong> &rarr; <strong>Log</strong> (to see process creation logs).</li>
+                        <li><strong>View</strong> &rarr; <strong>Executable modules</strong> (to see DLLs like <code>kernel32.dll</code>).</li>
+                        <li><strong>View</strong> &rarr; <strong>Memory map</strong> (to see stack/heap allocation).</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <div class="nav-buttons">
+                <a href="#sec2" class="btn">&lt; PREV</a>
+                <a href="#sec4" class="btn">NEXT: DYNAMIC ANALYSIS &gt;</a>
+            </div>
+        </section>
+
+        <section id="sec4">
+            <h2>Section 4: Dynamic Analysis</h2>
+            <p><strong>Goal:</strong> Monitor a live malware infection to identify network ports and file system changes.</p>
+
+            <h3>1. Port Monitoring (TCPView & CurrPorts)</h3>
+            <p class="note"><strong>[WARNING] Setup:</strong> Ensure <code>Trojan.exe</code> (from Lab 1) is running on the victim machine before starting.</p>
+            <ol>
+                <li><strong>TCPView Analysis:</strong>
+                    <ul>
+                        <li>Launch <code>tcpview.exe</code>.</li>
+                        <li>Locate <code>Trojan.exe</code> in the list.</li>
+                        <li><strong>Identify Connection:</strong> State should be <strong>Established</strong>. Note the <strong>Remote Address</strong> (<code>10.10.1.11</code>) and <strong>Remote Port</strong> (<code>5553</code>).</li>
+                    </ul>
+                </li>
+                <li><strong>CurrPorts Analysis:</strong>
+                    <ul>
+                        <li>Launch <code>cports.exe</code>.</li>
+                        <li>Locate <code>Trojan.exe</code>. Verify <strong>Local Port</strong> and <strong>Remote Port</strong> match the attacker configuration.</li>
+                        <li><strong>Action:</strong> Right-click process &rarr; <strong>Close Selected TCP Connections</strong> (optional remediation).</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3>2. Process Monitoring (Process Monitor)</h3>
+            <ol>
+                <li><strong>Launch Tool:</strong> Open <code>Procmon.exe</code>.</li>
+                <li><strong>Filter/Search:</strong> Scroll or use the filter function for <strong>Process Name</strong> contains <code>Trojan.exe</code>.</li>
+                <li><strong>Inspect:</strong> Double-click the process line to open <strong>Event Properties</strong>.
+                    <ul>
+                        <li><strong>Path:</strong> Verify location (e.g., <code>AppData\Local\Temp\Trojan.exe</code>).</li>
+                        <li><strong>Modules:</strong> Check loaded DLLs in the <strong>Stack</strong> or <strong>Process</strong> tab.</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <div class="nav-buttons">
+                <a href="#sec3" class="btn">&lt; PREV</a>
+                <a href="#sec5" class="btn">NEXT: SNIFFING &gt;</a>
+            </div>
+        </section>
+
+        <section id="sec5">
+            <h2>Section 5: Network Sniffing</h2>
+            <p><strong>Goal:</strong> Perform active/passive sniffing, capture credentials, and detect sniffing attacks.</p>
+
+            <h3>Lab 1: Active Sniffing (Flooding & Starvation)</h3>
+            <p><strong>Environment:</strong> Parrot Security (Attacker).</p>
+            <ol>
+                <li><strong>MAC Flooding (macof):</strong>
+                    <ul>
+                        <li>Open Terminal: <code>sudo su</code> (pass: <code>toor</code>).</li>
+                        <li>Run: <code>macof -i eth0 -n 10</code>.</li>
+                        <li><strong>Verify:</strong> Check Wireshark for random MAC/IP packets.</li>
+                    </ul>
+                </li>
+                <li><strong>DHCP Starvation (Yersinia):</strong>
+                    <ul>
+                        <li>Launch Interactive Mode: <code>yersinia -I</code>.</li>
+                        <li><strong>Configure:</strong> Press <code>F2</code> (DHCP Mode) -> Press <code>x</code> (Attack Menu) -> Press <code>1</code> (Send DISCOVER packets).</li>
+                        <li><strong>Verify:</strong> Watch DHCP packet count rise. Press <code>q</code> to stop.</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3>Lab 2: Sniffing Credentials & Remote Traffic</h3>
+            <ol>
+                <li><strong>Password Sniffing (Wireshark):</strong>
+                    <ul>
+                        <li><strong>Attacker (Server 2019):</strong> Start Wireshark on Ethernet 2.</li>
+                        <li><strong>Victim (Win 11):</strong> Log into <code>http://www.moviescope.com</code> (User: <code>sam</code> / Pass: <code>test</code>).</li>
+                        <li><strong>Filter:</strong> Stop capture. Apply filter <code>http.request.method == POST</code>.</li>
+                        <li><strong>Find:</strong> Edit -> Find Packet -> String: <code>pwd</code>. Look in "HTML Form URL Encoded".</li>
+                    </ul>
+                </li>
+                <li><strong>Remote Sniffing (Remote Packet Capture Protocol):</strong>
+                    <ul>
+                        <li><strong>Target (Win 11):</strong> Start service <code>Remote Packet Capture Protocol v.0 (experimental)</code> in <code>services.msc</code>.</li>
+                        <li><strong>Attacker (Server 2019):</strong> Wireshark -> Capture Options -> Manage Interfaces -> Remote Interfaces.</li>
+                        <li><strong>Add Host:</strong> IP: <code>10.10.1.11</code>, Port: <code>2002</code>, Auth: <code>Jason</code> / <code>qwerty</code>.</li>
+                        <li><strong>Start:</strong> Select the new remote interface and click Start.</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3>Lab 3: Detecting Sniffing Attacks</h3>
+            <ol>
+                <li><strong>Detect ARP Poisoning (Wireshark):</strong>
+                    <ul>
+                        <li><strong>Simulate:</strong> Use Cain & Abel (Configure Sniffer -> Scan MACs -> APR Tab -> Add Victims -> Start APR).</li>
+                        <li><strong>Detect:</strong> In Wireshark, go to <strong>Edit</strong> -> <strong>Preferences</strong> -> <strong>Protocols</strong> -> <strong>ARP/RARP</strong>.</li>
+                        <li><strong>Enable:</strong> "Detect ARP request storms" and "Detect duplicate IP address configuration".</li>
+                        <li><strong>Result:</strong> Analyze -> Expert Information -> Look for "Duplicate IP address configured".</li>
+                    </ul>
+                </li>
+                <li><strong>Detect Promiscuous Mode (Nmap):</strong>
+                    <ul>
+                        <li><strong>Tool:</strong> Ubuntu Machine. Install: <code>apt install nmap -y</code>.</li>
+                        <li><strong>Scan:</strong> <code>nmap --script sniffer-detect 10.10.1.19</code> (Target IP).</li>
+                        <li><strong>Result:</strong> Output should say <code>_sniffer-detect: Likely in promiscuous mode</code>.</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <div class="nav-buttons">
+                <a href="#sec4" class="btn">&lt; PREV</a>
+                <a href="#sec6" class="btn">NEXT: SOCIAL ENG &gt;</a>
+            </div>
+        </section>
+
+        <section id="sec6">
+            <h2>Section 6: Social Engineering</h2>
+            <p><strong>Goal:</strong> Perform social engineering attacks (Credential Harvesting) and detect phishing attempts.</p>
+
+            <h3>Lab 1: Credential Harvesting (SET)</h3>
+            <p><strong>Environment:</strong> Parrot Security (Attacker) & Windows 11 (Victim).</p>
+            <ol>
+                <li><strong>Launch Tool:</strong> Open Terminal and run: 
+                    <pre>sudo su
+setoolkit</pre>
+                </li>
+                <li><strong>Configure Attack Vector:</strong> Select options in this order:
+                    <ul>
+                        <li><code>1</code> Social-Engineering Attacks</li>
+                        <li><code>2</code> Website Attack Vectors</li>
+                        <li><code>3</code> Credential Harvester Attack Method</li>
+                        <li><code>2</code> Site Cloner</li>
+                    </ul>
+                </li>
+                <li><strong>Set Parameters:</strong>
+                    <ul>
+                        <li><strong>IP Address:</strong> Enter your Parrot IP (e.g., <code>10.10.1.13</code>).</li>
+                        <li><strong>URL to Clone:</strong> Enter <code>http://www.moviescope.com</code>.</li>
+                    </ul>
+                </li>
+                <li><strong>Execute:</strong>
+                    <ul>
+                        <li>Send the malicious link (your IP) to the victim (simulated via email).</li>
+                        <li>When the victim logs in, credentials appear in the Parrot terminal.</li>
+                    </ul>
+                </li>
+            </ol>
+
+            <h3>Lab 2: Detect Phishing (Netcraft)</h3>
+            <p><strong>Environment:</strong> Windows 11.</p>
+            <ol>
+                <li><strong>Install Extension:</strong> Install the Netcraft Extension on Firefox.</li>
+                <li><strong>Analyze Site:</strong> Visit a site (e.g., <code>www.certifiedhacker.com</code>) and click the extension icon to view the <strong>Site Report</strong> (Rank, Country, Host).</li>
+                <li><strong>Verify Blocking:</strong> Visit a known test phishing site (e.g., <code>https://end-authenticat.tftpd.net/</code>). Verify that Netcraft blocks it with a "Suspected Phishing" warning.</li>
+            </ol>
+
+            <h3>Lab 3: AI Phishing (ChatGPT)</h3>
+            <p><strong>Environment:</strong> Web Browser.</p>
+            <p>Use AI to generate convincing phishing templates (Disclaimer: For educational/testing purposes only).</p>
+            <ul>
+                <li><strong>Support Scam Prompt:</strong>
+                    <pre>Pose as a genuine Microsoft customer support executive with imaginary name, write a concise mail stating that he/she has found suspicious login on user's account and ask them to reset the password on urgent basis. Provide the reset link at [Fake Reset Link].</pre>
+                </li>
+                <li><strong>IT Policy Update Prompt:</strong>
+                    <pre>Write an email from a company's IT administrator to its employees letting them know that they need to install the latest security software. Provide a link where the employee can download the software. Let them know that all employees must complete the download by next Friday.</pre>
+                </li>
+                <li><strong>Impersonation Prompt:</strong> Use sample text from a target to instruct the AI to "Impersonate [Name]'s writing style...".</li>
+            </ul>
+
+            <div class="nav-buttons">
+                <a href="#sec5" class="btn">&lt; PREV</a>
+                <a href="#intro" class="btn">RETURN HOME &gt;</a>
+            </div>
+        </section>
+
+        <footer>
+            <p>End of Module Reference Guide.</p>
+        </footer>
+
+    </div>
+
+</body>
+</html>
