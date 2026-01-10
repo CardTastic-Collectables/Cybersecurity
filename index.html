@@ -115,7 +115,7 @@
         }
 
         .hero-content {
-            max-width: 800px;
+            max-width: 900px;
         }
 
         .hero h1 {
@@ -145,9 +145,29 @@
         }
 
         .hero p {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: var(--text-muted);
             margin-bottom: 2rem;
+            line-height: 1.7;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            font-size: 0.95rem;
+        }
+
+        .contact-info a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-info a:hover {
+            color: var(--primary);
         }
 
         .cta-buttons {
@@ -222,6 +242,18 @@
             background: linear-gradient(90deg, transparent, var(--primary), transparent);
         }
 
+        .about-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-content p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
         /* Skills Grid */
         .skills-grid {
             display: grid;
@@ -273,74 +305,119 @@
             color: var(--primary);
         }
 
-        .skill-card p {
+        .skill-list {
+            list-style: none;
             color: var(--text-muted);
-            line-height: 1.6;
         }
 
-        /* Projects Grid */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
+        .skill-list li {
+            padding: 0.3rem 0;
+            padding-left: 1.2rem;
+            position: relative;
         }
 
-        .project-card {
+        .skill-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary), var(--accent));
+        }
+
+        .timeline-item {
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) {
+            padding-right: calc(50% + 2rem);
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) {
+            padding-left: calc(50% + 2rem);
+        }
+
+        .timeline-content {
             background: rgba(22, 27, 34, 0.9);
-            border: 1px solid rgba(31, 111, 235, 0.3);
+            border: 1px solid rgba(0, 255, 65, 0.2);
             border-radius: 10px;
-            overflow: hidden;
+            padding: 1.5rem;
             transition: all 0.3s;
         }
 
-        .project-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent);
-            box-shadow: 0 10px 40px rgba(31, 111, 235, 0.3);
+        .timeline-content:hover {
+            border-color: var(--primary);
+            box-shadow: 0 5px 20px rgba(0, 255, 65, 0.2);
         }
 
-        .project-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, var(--secondary), var(--dark));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
+        .timeline-date {
             color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
         }
 
-        .project-content {
-            padding: 1.5rem;
+        .timeline-content h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
         }
 
-        .project-card h3 {
-            font-size: 1.5rem;
+        .timeline-content h4 {
+            color: var(--text);
             margin-bottom: 1rem;
-            color: var(--accent);
+            font-weight: 500;
         }
 
-        .project-tags {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin-top: 1rem;
+        .timeline-content ul {
+            list-style: none;
+            color: var(--text-muted);
         }
 
-        .tag {
-            background: rgba(31, 111, 235, 0.2);
-            color: var(--accent);
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.85rem;
-            border: 1px solid rgba(31, 111, 235, 0.3);
+        .timeline-content ul li {
+            padding: 0.3rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+        }
+
+        .timeline-content ul li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border: 4px solid var(--dark);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--primary);
         }
 
         /* Certifications */
         .cert-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
             margin-top: 3rem;
         }
@@ -350,8 +427,8 @@
             border: 1px solid rgba(0, 255, 65, 0.2);
             border-radius: 8px;
             padding: 1.5rem;
-            text-align: center;
             transition: all 0.3s;
+            position: relative;
         }
 
         .cert-card:hover {
@@ -368,6 +445,29 @@
         .cert-card h4 {
             color: var(--primary);
             margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .cert-card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .cert-status {
+            display: inline-block;
+            margin-top: 0.5rem;
+            padding: 0.3rem 0.8rem;
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 15px;
+            font-size: 0.8rem;
+            color: var(--primary);
+        }
+
+        .cert-status.in-progress {
+            background: rgba(255, 165, 0, 0.1);
+            border-color: #ffa500;
+            color: #ffa500;
         }
 
         /* Contact Section */
@@ -408,6 +508,7 @@
             color: var(--text);
             text-decoration: none;
             transition: color 0.3s;
+            word-break: break-all;
         }
 
         .contact-card a:hover {
@@ -427,6 +528,23 @@
         }
 
         /* Responsive */
+        @media (max-width: 968px) {
+            .timeline::before {
+                left: 0;
+            }
+
+            .timeline-item:nth-child(odd),
+            .timeline-item:nth-child(even) {
+                padding-left: 2rem;
+                padding-right: 0;
+                text-align: left;
+            }
+
+            .timeline-marker {
+                left: 0;
+            }
+        }
+
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
@@ -438,6 +556,7 @@
 
             .nav-links {
                 gap: 1rem;
+                font-size: 0.9rem;
             }
 
             .section-title {
@@ -446,6 +565,11 @@
 
             .cta-buttons {
                 flex-direction: column;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 0.5rem;
             }
         }
     </style>
@@ -460,7 +584,7 @@
                 <ul class="nav-links">
                     <li><a href="#about">About</a></li>
                     <li><a href="#skills">Skills</a></li>
-                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#experience">Experience</a></li>
                     <li><a href="#certifications">Certifications</a></li>
                     <li><a href="#contact">Contact</a></li>
                 </ul>
@@ -471,201 +595,276 @@
             <div class="hero-content">
                 <h1>Jason Keyt</h1>
                 <h2>Cybersecurity Professional</h2>
-                <p>Protecting digital assets and securing infrastructure with cutting-edge security practices</p>
+                <div class="contact-info">
+                    <span>📍 Caulfield South, VIC</span>
+                    <a href="mailto:jason.keyt@gmail.com">📧 jason.keyt@gmail.com</a>
+                    <a href="tel:0425817199">📱 0425-817-199</a>
+                </div>
+                <p>Highly experienced IT professional transitioning into cybersecurity with 25+ years of leadership in education and business management. Specializing in network security, threat detection, vulnerability management, and ethical penetration testing. Certified in CompTIA Security+, Network+, CySA+, PenTest+, and currently pursuing CEH certification.</p>
                 <div class="cta-buttons">
-                    <a href="#projects" class="btn btn-primary">View Projects</a>
-                    <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+                    <a href="#certifications" class="btn btn-primary">View Certifications</a>
+                    <a href="http://www.linkedin.com/in/jason-keyt" target="_blank" class="btn btn-secondary">LinkedIn Profile</a>
                 </div>
             </div>
         </section>
 
         <section id="about">
-            <h2 class="section-title">About Me</h2>
-            <p style="text-align: center; max-width: 800px; margin: 0 auto; font-size: 1.1rem; color: var(--text-muted);">
-                Passionate cybersecurity professional with expertise in penetration testing, security architecture, 
-                and threat analysis. Committed to staying ahead of emerging threats and implementing robust security solutions 
-                that protect organizations from evolving cyber risks.
-            </p>
+            <h2 class="section-title">Career Objective</h2>
+            <div class="about-content">
+                <p>A highly experienced educator and IT professional with over 25 years of leadership in Secondary Education and Business Management, specializing in IT, e-commerce, and digital infrastructure. I have successfully managed business operations, including IT infrastructure, SEO, website development, and the application of AI tools to optimize marketing strategies and customer engagement.</p>
+                <p>Currently upskilling in Ethical Penetration Testing with certifications including CompTIA Network+, Security+, CySA+, PenTest+ and Google Cyber Security Professional V2. My goal is to transition into the cybersecurity field, applying my skills in network security, risk management, and incident response to protect and secure digital assets.</p>
+            </div>
         </section>
 
         <section id="skills">
-            <h2 class="section-title">Core Skills</h2>
+            <h2 class="section-title">Core Competencies</h2>
             <div class="skills-grid">
                 <div class="skill-card">
                     <div class="skill-icon">🔐</div>
-                    <h3>Penetration Testing</h3>
-                    <p>Comprehensive security assessments, vulnerability identification, and exploitation testing using industry-standard tools and methodologies.</p>
+                    <h3>Cybersecurity</h3>
+                    <ul class="skill-list">
+                        <li>Cybersecurity Fundamentals</li>
+                        <li>Security Analytics & Monitoring</li>
+                        <li>Threat Detection</li>
+                        <li>Vulnerability Management</li>
+                        <li>Network Security</li>
+                    </ul>
                 </div>
                 <div class="skill-card">
-                    <div class="skill-icon">🛡️</div>
-                    <h3>Network Security</h3>
-                    <p>Firewall configuration, intrusion detection/prevention systems, VPN implementation, and network segmentation strategies.</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">🔍</div>
-                    <h3>Threat Intelligence</h3>
-                    <p>Security monitoring, threat hunting, incident response, and analysis of attack patterns and indicators of compromise.</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">⚙️</div>
-                    <h3>Security Architecture</h3>
-                    <p>Design and implementation of secure systems, zero-trust architecture, and defense-in-depth strategies.</p>
-                </div>
-                <div class="skill-card">
-                    <div class="skill-icon">📊</div>
-                    <h3>Risk Assessment</h3>
-                    <p>Vulnerability management, security audits, compliance frameworks (NIST, ISO 27001), and risk mitigation planning.</p>
+                    <div class="skill-icon">🌐</div>
+                    <h3>Network Infrastructure</h3>
+                    <ul class="skill-list">
+                        <li>Network Troubleshooting</li>
+                        <li>VPN, DNS & DHCP Services</li>
+                        <li>Network Configuration</li>
+                        <li>Infrastructure Management</li>
+                    </ul>
                 </div>
                 <div class="skill-card">
                     <div class="skill-icon">💻</div>
-                    <h3>Security Tools</h3>
-                    <p>Proficient with Metasploit, Burp Suite, Wireshark, Nmap, SIEM platforms, and custom scripting for automation.</p>
+                    <h3>Development & IT</h3>
+                    <ul class="skill-list">
+                        <li>Software Development</li>
+                        <li>Website Development</li>
+                        <li>Database Administration</li>
+                        <li>Business Systems</li>
+                        <li>Algorithmics</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🛒</div>
+                    <h3>Digital Business</h3>
+                    <ul class="skill-list">
+                        <li>E-Commerce Management</li>
+                        <li>SEO Optimization</li>
+                        <li>IT Infrastructure</li>
+                        <li>AI-Driven Technologies</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">👥</div>
+                    <h3>Leadership & Management</h3>
+                    <ul class="skill-list">
+                        <li>Team Management</li>
+                        <li>Strategic Planning</li>
+                        <li>Stakeholder Engagement</li>
+                        <li>Project Coordination</li>
+                        <li>Performance Development</li>
+                    </ul>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🎓</div>
+                    <h3>Education & Training</h3>
+                    <ul class="skill-list">
+                        <li>Curriculum Development</li>
+                        <li>Workplace Training</li>
+                        <li>Educational Technology</li>
+                        <li>Program Design</li>
+                    </ul>
                 </div>
             </div>
         </section>
 
-        <section id="projects">
-            <h2 class="section-title">Featured Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">🔒</div>
-                    <div class="project-content">
-                        <h3>Enterprise Security Assessment</h3>
-                        <p>Conducted comprehensive penetration testing for a Fortune 500 company, identifying critical vulnerabilities and providing remediation strategies.</p>
-                        <div class="project-tags">
-                            <span class="tag">Pentesting</span>
-                            <span class="tag">Vulnerability Assessment</span>
-                            <span class="tag">Risk Analysis</span>
-                        </div>
+        <section id="experience">
+            <h2 class="section-title">Professional Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2025 - Current</div>
+                        <h3>Sandringham College</h3>
+                        <h4>Leading Teacher Disability Inclusion (Years 7-12)</h4>
+                        <ul>
+                            <li>Work with teachers, Education Support staff and leaders to implement effective educational adjustments</li>
+                            <li>Provide targeted support for students with additional needs</li>
+                        </ul>
                     </div>
                 </div>
-                <div class="project-card">
-                    <div class="project-image">🌐</div>
-                    <div class="project-content">
-                        <h3>Network Security Hardening</h3>
-                        <p>Redesigned network architecture implementing zero-trust principles, reducing attack surface by 70% and improving incident response time.</p>
-                        <div class="project-tags">
-                            <span class="tag">Network Security</span>
-                            <span class="tag">Zero Trust</span>
-                            <span class="tag">IDS/IPS</span>
-                        </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2024 - Present</div>
+                        <h3>JEK Industries Pty Ltd</h3>
+                        <h4>Director</h4>
+                        <ul>
+                            <li>WashWell Laundromat - Manage e-commerce business operations</li>
+                            <li>Oversee IT infrastructure, SEO, and website development</li>
+                        </ul>
                     </div>
                 </div>
-                <div class="project-card">
-                    <div class="project-image">🚨</div>
-                    <div class="project-content">
-                        <h3>SIEM Implementation</h3>
-                        <p>Deployed and configured enterprise SIEM solution with custom correlation rules, improving threat detection capabilities and response automation.</p>
-                        <div class="project-tags">
-                            <span class="tag">SIEM</span>
-                            <span class="tag">Threat Detection</span>
-                            <span class="tag">Automation</span>
-                        </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2024</div>
+                        <h3>Sandringham College</h3>
+                        <h4>Head of Sub School (Years 10-12)</h4>
+                        <ul>
+                            <li>Led academic and pastoral care programs for senior students</li>
+                            <li>Improved engagement, retention, and VCE outcomes through data-driven interventions</li>
+                            <li>Implemented personalized learning pathways</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2018 - 2023</div>
+                        <h3>Sandringham College</h3>
+                        <h4>Year Level Leader (Year 12)</h4>
+                        <ul>
+                            <li>Oversaw Year 12 student cohort with academic monitoring</li>
+                            <li>Provided career counselling and tailored AI-driven learning strategies</li>
+                            <li>Enhanced student success through innovative approaches</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2010 - 2017</div>
+                        <h3>Sandringham College</h3>
+                        <h4>Student Manager (Years 10-12)</h4>
+                        <ul>
+                            <li>Developed and implemented well-being and behaviour management plans</li>
+                            <li>Collaborated with stakeholders to ensure comprehensive student support</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2000 - Present</div>
+                        <h3>Sandringham College</h3>
+                        <h4>Secondary Teacher</h4>
+                        <p style="color: var(--text-muted); margin-top: 0.5rem;"><strong>Subjects Taught:</strong> Mathematics (Years 7-10), Science, VET IT, VET Gaming, VCE Chemistry, Further Maths, Maths Methods, General Maths, Algorithmics, VCE Software Development and Computing</p>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">1991 - Present</div>
+                        <h3>CardTastic Collectables and Gaming</h3>
+                        <h4>Owner</h4>
+                        <ul>
+                            <li>Managed e-commerce business operations, including IT infrastructure, SEO, and website development</li>
+                            <li>Leveraged AI tools to optimize inventory management, marketing strategies, and customer engagement</li>
+                            <li>Developed robust digital presence to drive sales growth and ensure exceptional user experience</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item">
+                    <div class="timeline-marker"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-date">2000 - Present</div>
+                        <h3>Monash University</h3>
+                        <h4>Indoor Cycle Instructor (Caulfield and Clayton Campus)</h4>
+                        <ul>
+                            <li>Delivered high-energy indoor cycling classes focused on health and wellness</li>
+                            <li>Fostered positive environment encouraging long-term fitness engagement</li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </section>
 
         <section id="certifications">
-            <h2 class="section-title">Certifications</h2>
+            <h2 class="section-title">Certifications & Education</h2>
             <div class="cert-grid">
                 <div class="cert-card">
                     <div class="cert-icon">🎖️</div>
-                    <h4>CISSP</h4>
-                    <p>Certified Information Systems Security Professional</p>
-                </div>
-                <div class="cert-card">
-                    <div class="cert-icon">🏆</div>
-                    <h4>CEH</h4>
+                    <h4>CEH v13</h4>
                     <p>Certified Ethical Hacker</p>
+                    <span class="cert-status in-progress">In Progress</span>
                 </div>
                 <div class="cert-card">
-                    <div class="cert-icon">⭐</div>
-                    <h4>OSCP</h4>
-                    <p>Offensive Security Certified Professional</p>
+                    <div class="cert-icon">🤖</div>
+                    <h4>CompTIA AI Essentials</h4>
+                    <p>November 2025</p>
+                    <span class="cert-status">Certified</span>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">🔍</div>
+                    <h4>CompTIA PenTest+</h4>
+                    <p>Penetration Testing Professional</p>
+                    <span class="cert-status">October 2025</span>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">🌐</div>
+                    <h4>CNSP</h4>
+                    <p>CompTIA Network Security Professional</p>
+                    <span class="cert-status">October 2025</span>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">🔒</div>
+                    <h4>CNVP</h4>
+                    <p>Network Vulnerability Assessment Professional</p>
+                    <span class="cert-status">October 2025</span>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">📊</div>
+                    <h4>CompTIA CySA+</h4>
+                    <p>Cybersecurity Analyst</p>
+                    <span class="cert-status">July 2025</span>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">🛡️</div>
+                    <h4>CSAP</h4>
+                    <p>CompTIA Security Analytics Professional</p>
+                    <span class="cert-status">July 2025</span>
                 </div>
                 <div class="cert-card">
                     <div class="cert-icon">🔐</div>
-                    <h4>Security+</h4>
-                    <p>CompTIA Security+</p>
+                    <h4>Google Cybersecurity</h4>
+                    <p>Professional Certificate V2</p>
+                    <span class="cert-status">July 2025</span>
                 </div>
-            </div>
-        </section>
-
-        <section id="contact">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-grid">
-                <div class="contact-card">
-                    <div class="contact-icon">📧</div>
-                    <h3>Email</h3>
-                    <a href="mailto:jason@cybersec.com">jason@cybersec.com</a>
+                <div class="cert-card">
+                    <div class="cert-icon">⭐</div>
+                    <h4>CompTIA Security+</h4>
+                    <p>Security Fundamentals</p>
+                    <span class="cert-status">April 2025</span>
                 </div>
-                <div class="contact-card">
-                    <div class="contact-icon">💼</div>
-                    <h3>LinkedIn</h3>
-                    <a href="https://linkedin.com" target="_blank">Connect with me</a>
+                <div class="cert-card">
+                    <div class="cert-icon">🌐</div>
+                    <h4>CompTIA Network+</h4>
+                    <p>Network Infrastructure</p>
+                    <span class="cert-status">February 2025</span>
                 </div>
-                <div class="contact-card">
-                    <div class="contact-icon">🐙</div>
-                    <h3>GitHub</h3>
-                    <a href="https://github.com" target="_blank">View my code</a>
+                <div class="cert-card">
+                    <div class="cert-icon">🎓</div>
+                    <h4>Certificate IV</h4>
+                    <p>Workplace Training & Assessment</p>
+                    <span class="cert-status">2023</span>
                 </div>
-            </div>
-        </section>
-
-        <footer>
-            <p>&copy; 2026 Jason Keyt. All rights reserved.</p>
-        </footer>
-    </div>
-
-    <script>
-        // Matrix rain effect
-        const canvas = document.getElementById('matrix-canvas');
-        const ctx = canvas.getContext('2d');
-
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
-        const fontSize = 14;
-        const columns = canvas.width / fontSize;
-        const drops = Array(Math.floor(columns)).fill(1);
-
-        function drawMatrix() {
-            ctx.fillStyle = 'rgba(13, 17, 23, 0.05)';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            ctx.fillStyle = '#00ff41';
-            ctx.font = fontSize + 'px monospace';
-
-            for (let i = 0; i < drops.length; i++) {
-                const text = chars[Math.floor(Math.random() * chars.length)];
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-                    drops[i] = 0;
-                }
-                drops[i]++;
-            }
-        }
-
-        setInterval(drawMatrix, 35);
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
-
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-    </script>
-</body>
-</html>
+                <div class="cert-card">
+                    <div class="cert-icon">🎓</div>
+                    <h4>Bachelor of IT</h4>
+                    <p>Business Systems Major - Monash University</p>
+                    <span class="cert-status">2006</span>
